@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory System</title>
+</head>
+<body style="font-family: Arial; text-align:center; margin-top:50px;">
+
+    <h1>Inventory Management</h1>
+
+    <input id="name" placeholder="Item name">
+    <input id="qty" placeholder="Quantity" type="number">
+    <button onclick="addItem()">Add Item</button>
+
+    <h2>Items:</h2>
+    <div id="items"></div>
+
+    <script>
+        async function addItem() {
+            let name = document.getElementById("name").value;
+            let qty = document.getElementById("qty").value;
+
+            await fetch("http://127.0.0.1:8000/items", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({name: name, quantity: parseInt(qty)})
+            });
+
+            loadItems();
+        }
+
+        async function loadItems() {
+            let res = await fetch("http://127.0.0.1:8000/items");
+            let data = await res.json();
+
+            let div = document.getElementById("items");
+            div.innerHTML = "";
+
+            data.forEach(item => {
+                div.innerHTML += `<p>${item.name} - ${item.quantity}</p>`;
+            });
+        }
+
+        loadItems();
+    </script>
+
+</body>
+</html>
