@@ -1,23 +1,9 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from app.database.db import Base, engine
+from app.routers import item_router
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-inventory = []
-
-class Item(BaseModel):
-    name: str
-    quantity: int
-
-@app.get("/")
-def home():
-    return {"message": "Inventory API running"}
-
-@app.get("/items")
-def get_items():
-    return inventory
-
-@app.post("/items")
-def add_item(item: Item):
-    inventory.append(item)
-    return {"message": "Item added", "item": item}
+app.include_router(item_router.router)
