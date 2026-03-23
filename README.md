@@ -1,22 +1,42 @@
-# 📦 Inventory Management System (FastAPI + Frontend)
+# 📦 Inventory Management System
 
-## 📌 Overview
+## 📖 About
 
-Simple inventory system to add and view items.
+This is a simple Inventory Management System built using FastAPI.
 
 ## 🚀 Features
 
 * Add items
 * View items
-* FastAPI backend
-* Simple frontend UI
+* Delete items
+* Uses SQLite database
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
-* Python (FastAPI)
-* HTML (Frontend)
+* FastAPI
+* SQLAlchemy
+* SQLite
 
-## ▶️ Run
+## ▶️ How to Run
 
+```bash
+pip install -r requirements.txt
 uvicorn main:app --reload
+```
 
+## 📍 API Documentation
+
+After running, open:
+http://127.0.0.1:8000/docs
+
+## 📂 Project Structure
+
+```
+app/
+ ├── database/
+ ├── models/
+ ├── routers/
+ ├── schemas/
+ ├── services/
+main.py
+requirements.txt
